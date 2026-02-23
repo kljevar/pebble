@@ -20,6 +20,10 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kljevar/pebble.git"
+  },
   "keywords": [
     "react",
     "components",
@@ -33,7 +37,8 @@
     "build": "tsc --noEmit && vite build",
     "build:storybook": "storybook build",
     "lint": "eslint src --ext .ts,.tsx",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "vite build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

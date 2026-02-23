@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# Pebble Design System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A compact, thoughtfully designed React component library built with TypeScript and CSS Modules.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+Install directly from GitHub:
 
-### `npm start`
+```bash
+npm install kljevar/pebble
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Or pin to a specific tag/commit:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install kljevar/pebble#v0.1.0
+```
 
-### `npm test`
+> **Note:** The package builds automatically during install via the `prepare` script. Node >=18 is required.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+Import components and the stylesheet:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```tsx
+import { Button, Input, Badge } from 'pebble-design-system';
+import 'pebble-design-system/styles';
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Example
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```tsx
+import { Button, Badge, Card } from 'pebble-design-system';
+import 'pebble-design-system/styles';
 
-### `npm run eject`
+function App() {
+  return (
+    <Card>
+      <Badge variant="success">Live</Badge>
+      <Button variant="primary" onClick={() => console.log('clicked')}>
+        Get Started
+      </Button>
+    </Card>
+  );
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Components
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Component | Description |
+|-----------|-------------|
+| `Button` | Primary action element with variants: `primary`, `secondary`, `ghost`, `danger` |
+| `Input` | Text input with label and error state support |
+| `Textarea` | Multi-line text input |
+| `Select` | Dropdown selector |
+| `Checkbox` | Checkbox input with label |
+| `Modal` | Accessible dialog overlay |
+| `Card` | Content container with optional padding variants |
+| `Badge` | Status/label indicator with semantic variants |
+| `Avatar` | User avatar with fallback initials |
+| `AvatarGroup` | Stacked group of avatars |
+| `Tooltip` | Hover tooltip |
+| `Spinner` | Loading indicator |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Design Tokens
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Pebble exposes all design tokens as CSS custom properties prefixed with `--pb-*`. You can override them to theme the library:
 
-## Learn More
+```css
+:root {
+  --pb-primary-500: #4f46e5; /* indigo */
+  --pb-radius-md: 6px;
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Development
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+# Install dependencies
+npm install
 
-### Code Splitting
+# Start Storybook
+npm run dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Build library
+npm run build
 
-### Analyzing the Bundle Size
+# Build Storybook docs
+npm run build:storybook
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Requirements
 
-### Making a Progressive Web App
+- React >=18
+- Node >=18
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
