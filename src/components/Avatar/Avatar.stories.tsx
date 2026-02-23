@@ -31,7 +31,7 @@ export const WithStatus: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <Avatar name="Alice Brown" status="online" size="md" />
-      <Avatar name="Bob Jones" status="away" size="md" />
+      <Avatar name="Rob Jones" status="away" size="md" />
       <Avatar name="Carol Lee" status="busy" size="md" />
       <Avatar name="Dan Kim" status="offline" size="md" />
     </div>
