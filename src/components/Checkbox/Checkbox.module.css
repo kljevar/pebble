@@ -1,0 +1,156 @@
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--pb-space-1);
+  font-family: var(--pb-font-sans);
+}
+
+.checkboxRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pb-space-2);
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.sm .checkboxBox {
+  width: 14px;
+  height: 14px;
+}
+.sm .label {
+  font-size: var(--pb-text-xs);
+}
+
+.md .checkboxBox {
+  width: 18px;
+  height: 18px;
+}
+.md .label {
+  font-size: var(--pb-text-sm);
+}
+
+/* ─── Checkbox outer (positions the box over the hidden input) ───────────── */
+
+.checkboxOuter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── Hidden native input ────────────────────────────────────────────────── */
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  z-index: 1;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Visual box ─────────────────────────────────────────────────────────── */
+
+.checkboxBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pb-radius-sm);
+  border: 1.5px solid var(--pb-stone-400);
+  background-color: var(--pb-bg-surface);
+  transition:
+    background-color var(--pb-ease-base),
+    border-color var(--pb-ease-base),
+    box-shadow var(--pb-ease-base);
+  pointer-events: none;
+}
+
+/* Hover (unchecked) */
+.input:hover:not(:disabled) ~ .checkboxBox {
+  border-color: var(--pb-primary-500);
+}
+
+/* Focus */
+.input:focus-visible ~ .checkboxBox {
+  box-shadow: var(--pb-focus-ring);
+  border-color: var(--pb-primary-500);
+  outline: none;
+}
+
+/* Checked */
+.input:checked ~ .checkboxBox {
+  background-color: var(--pb-primary-600);
+  border-color: var(--pb-primary-600);
+}
+
+/* Indeterminate */
+.input:indeterminate ~ .checkboxBox {
+  background-color: var(--pb-primary-600);
+  border-color: var(--pb-primary-600);
+}
+
+/* Disabled */
+.input:disabled ~ .checkboxBox {
+  background-color: var(--pb-bg-disabled);
+  border-color: var(--pb-stone-300);
+}
+
+.input:disabled:checked ~ .checkboxBox {
+  background-color: var(--pb-stone-300);
+  border-color: var(--pb-stone-300);
+}
+
+/* ─── Checkmark & dash icons ─────────────────────────────────────────────── */
+
+.checkmark,
+.dash {
+  width: 70%;
+  height: 70%;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity var(--pb-ease-fast);
+  position: absolute;
+}
+
+.input:checked ~ .checkboxBox .checkmark {
+  opacity: 1;
+}
+
+.input:indeterminate ~ .checkboxBox .dash {
+  opacity: 1;
+}
+
+/* ─── Label ──────────────────────────────────────────────────────────────── */
+
+.label {
+  color: var(--pb-text-primary);
+  line-height: var(--pb-leading-snug);
+  cursor: pointer;
+  user-select: none;
+}
+
+.disabled .label {
+  color: var(--pb-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ─── Helper text ────────────────────────────────────────────────────────── */
+
+.helperText {
+  margin: 0;
+  font-size: var(--pb-text-xs);
+  color: var(--pb-text-secondary);
+  line-height: var(--pb-leading-snug);
+  padding-left: calc(18px + var(--pb-space-2)); /* align with label */
+}
+
+.sm .helperText {
+  padding-left: calc(14px + var(--pb-space-2));
+}

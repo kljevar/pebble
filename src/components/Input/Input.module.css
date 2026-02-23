@@ -1,0 +1,147 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pb-space-1);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  font-weight: var(--pb-font-medium);
+  color: var(--pb-stone-700);
+  line-height: var(--pb-leading-snug);
+  letter-spacing: -0.01em;
+}
+
+/* ─── Input wrapper (border / bg container) ─────────────────────────────── */
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--pb-bg-surface);
+  border: 1.5px solid var(--pb-border-color);
+  border-radius: var(--pb-radius-md);
+  transition:
+    border-color var(--pb-ease-base),
+    box-shadow var(--pb-ease-base);
+}
+
+.inputWrapper:focus-within:not(.error):not(.disabled) {
+  border-color: var(--pb-border-color-focus);
+  box-shadow: var(--pb-focus-ring);
+}
+
+.inputWrapper.error {
+  border-color: var(--pb-border-color-error);
+}
+
+.inputWrapper.error:focus-within {
+  box-shadow: var(--pb-focus-ring-danger);
+}
+
+.inputWrapper.disabled {
+  background-color: var(--pb-bg-disabled);
+  cursor: not-allowed;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.sm {
+  height: var(--pb-input-height-sm);
+}
+
+.md {
+  height: var(--pb-input-height-md);
+}
+
+.lg {
+  height: var(--pb-input-height-lg);
+}
+
+/* ─── The actual <input> ─────────────────────────────────────────────────── */
+
+.input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-primary);
+  line-height: var(--pb-leading-normal);
+  padding: 0 var(--pb-space-3);
+}
+
+.sm .input {
+  font-size: var(--pb-text-xs);
+  padding: 0 var(--pb-space-2);
+}
+
+.lg .input {
+  font-size: var(--pb-text-base);
+  padding: 0 var(--pb-space-4);
+}
+
+.input::placeholder {
+  color: var(--pb-stone-400);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  color: var(--pb-text-disabled);
+}
+
+.input.hasLeft {
+  padding-left: var(--pb-space-1);
+}
+
+.input.hasRight {
+  padding-right: var(--pb-space-1);
+}
+
+/* ─── Icon slots ─────────────────────────────────────────────────────────── */
+
+.iconLeft,
+.iconRight {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--pb-stone-400);
+  line-height: 0;
+}
+
+.iconLeft {
+  padding-left: var(--pb-space-3);
+}
+
+.iconRight {
+  padding-right: var(--pb-space-3);
+}
+
+.iconLeft svg,
+.iconRight svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Helper / Error text ────────────────────────────────────────────────── */
+
+.helperText {
+  margin: 0;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-xs);
+  color: var(--pb-text-secondary);
+  line-height: var(--pb-leading-snug);
+}
+
+.errorText {
+  margin: 0;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-xs);
+  color: var(--pb-text-error);
+  line-height: var(--pb-leading-snug);
+}

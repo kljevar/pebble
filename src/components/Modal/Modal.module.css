@@ -1,0 +1,142 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pb-space-4);
+  z-index: var(--pb-z-modal);
+  animation: pb-backdrop-in var(--pb-ease-base) both;
+}
+
+.dialog {
+  position: relative;
+  background-color: var(--pb-bg-surface);
+  border-radius: var(--pb-radius-xl);
+  box-shadow: var(--pb-shadow-xl);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--pb-space-8));
+  overflow: hidden;
+  outline: none;
+  animation: pb-dialog-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.sm  { width: 100%; max-width: 400px; }
+.md  { width: 100%; max-width: 560px; }
+.lg  { width: 100%; max-width: 720px; }
+.full {
+  width: calc(100vw - var(--pb-space-8));
+  height: calc(100vh - var(--pb-space-8));
+  max-width: none;
+  max-height: none;
+  border-radius: var(--pb-radius-lg);
+}
+
+/* ─── Close button ───────────────────────────────────────────────────────── */
+
+.closeBtn {
+  position: absolute;
+  top: var(--pb-space-3);
+  right: var(--pb-space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--pb-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--pb-stone-500);
+  cursor: pointer;
+  transition:
+    background-color var(--pb-ease-base),
+    color var(--pb-ease-base);
+  z-index: 1;
+}
+
+.closeBtn:hover {
+  background-color: var(--pb-stone-100);
+  color: var(--pb-stone-800);
+}
+
+.closeBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--pb-focus-ring);
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  padding: var(--pb-space-6) var(--pb-space-6) 0;
+  padding-right: calc(var(--pb-space-6) + 32px + var(--pb-space-2));
+}
+
+.title {
+  margin: 0 0 var(--pb-space-1);
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-lg);
+  font-weight: var(--pb-font-semibold);
+  color: var(--pb-text-primary);
+  line-height: var(--pb-leading-tight);
+  letter-spacing: -0.02em;
+}
+
+.description {
+  margin: 0;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-secondary);
+  line-height: var(--pb-leading-relaxed);
+}
+
+/* ─── Body ───────────────────────────────────────────────────────────────── */
+
+.body {
+  padding: var(--pb-space-4) var(--pb-space-6) var(--pb-space-6);
+  overflow-y: auto;
+  flex: 1;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-primary);
+  line-height: var(--pb-leading-relaxed);
+}
+
+/* When there's a header, give body some top breathing room */
+.header + .body {
+  padding-top: var(--pb-space-4);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+
+.footer {
+  padding: var(--pb-space-4) var(--pb-space-6);
+  border-top: 1px solid var(--pb-stone-200);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--pb-space-3);
+  flex-shrink: 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes pb-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pb-dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

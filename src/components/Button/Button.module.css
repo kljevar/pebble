@@ -1,0 +1,155 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pb-space-2);
+  font-family: var(--pb-font-sans);
+  font-weight: var(--pb-font-medium);
+  border-radius: var(--pb-radius-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--pb-ease-base),
+    border-color var(--pb-ease-base),
+    color var(--pb-ease-base),
+    box-shadow var(--pb-ease-base),
+    transform var(--pb-ease-fast),
+    opacity var(--pb-ease-base);
+  position: relative;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  outline: none;
+  letter-spacing: -0.01em;
+}
+
+.button:focus-visible {
+  box-shadow: var(--pb-focus-ring);
+  outline: none;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.sm {
+  padding: 0 var(--pb-space-3);
+  font-size: var(--pb-text-xs);
+  line-height: 1;
+  height: 30px;
+  gap: var(--pb-space-1);
+}
+
+.md {
+  padding: 0 var(--pb-space-4);
+  font-size: var(--pb-text-sm);
+  line-height: 1;
+  height: 38px;
+}
+
+.lg {
+  padding: 0 var(--pb-space-6);
+  font-size: var(--pb-text-base);
+  line-height: 1;
+  height: 46px;
+  gap: var(--pb-space-3);
+}
+
+/* ─── Variants ──────────────────────────────────────────────────────────── */
+
+/* Primary */
+.primary {
+  background-color: var(--pb-primary-600);
+  border-color: var(--pb-primary-600);
+  color: #ffffff;
+}
+.primary:hover:not(:disabled) {
+  background-color: var(--pb-primary-700);
+  border-color: var(--pb-primary-700);
+}
+
+/* Secondary */
+.secondary {
+  background-color: var(--pb-stone-100);
+  border-color: var(--pb-stone-200);
+  color: var(--pb-stone-800);
+}
+.secondary:hover:not(:disabled) {
+  background-color: var(--pb-stone-200);
+  border-color: var(--pb-stone-300);
+}
+
+/* Ghost */
+.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--pb-stone-700);
+}
+.ghost:hover:not(:disabled) {
+  background-color: var(--pb-stone-100);
+  border-color: var(--pb-stone-200);
+}
+
+/* Outline */
+.outline {
+  background-color: transparent;
+  border-color: var(--pb-primary-400);
+  color: var(--pb-primary-600);
+}
+.outline:hover:not(:disabled) {
+  background-color: var(--pb-primary-50);
+  border-color: var(--pb-primary-500);
+}
+
+/* Danger */
+.danger {
+  background-color: var(--pb-danger-600);
+  border-color: var(--pb-danger-600);
+  color: #ffffff;
+}
+.danger:hover:not(:disabled) {
+  background-color: var(--pb-danger-700);
+  border-color: var(--pb-danger-700);
+}
+.danger:focus-visible {
+  box-shadow: var(--pb-focus-ring-danger);
+}
+
+/* ─── States ─────────────────────────────────────────────────────────────── */
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.loading {
+  cursor: wait;
+}
+
+/* ─── Icon slots ─────────────────────────────────────────────────────────── */
+
+.iconLeft,
+.iconRight {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.iconLeft svg,
+.iconRight svg {
+  width: 1em;
+  height: 1em;
+}
+
+.label {
+  /* Keeps label centred when icon shifts inline-flex layout */
+  display: inline-block;
+}

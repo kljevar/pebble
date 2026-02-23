@@ -1,0 +1,85 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pb-font-sans);
+  font-weight: var(--pb-font-medium);
+  border-radius: var(--pb-radius-full);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.sm {
+  padding: 2px var(--pb-space-2);
+  font-size: 11px;
+}
+
+.md {
+  padding: 3px var(--pb-space-2);
+  font-size: var(--pb-text-xs);
+}
+
+/* ─── Dot variant ────────────────────────────────────────────────────────── */
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: var(--pb-radius-full);
+  border-width: 1.5px;
+}
+
+.dot.md {
+  width: 10px;
+  height: 10px;
+}
+
+/* ─── Variants ──────────────────────────────────────────────────────────── */
+
+.default {
+  background-color: var(--pb-stone-100);
+  color: var(--pb-stone-700);
+  border-color: var(--pb-stone-200);
+}
+
+.primary {
+  background-color: var(--pb-primary-100);
+  color: var(--pb-primary-700);
+  border-color: var(--pb-primary-200);
+}
+
+.success {
+  background-color: var(--pb-success-100);
+  color: var(--pb-success-700);
+  border-color: var(--pb-success-100);
+}
+
+.warning {
+  background-color: var(--pb-warning-100);
+  color: var(--pb-warning-700);
+  border-color: var(--pb-warning-100);
+}
+
+.danger {
+  background-color: var(--pb-danger-100);
+  color: var(--pb-danger-700);
+  border-color: var(--pb-danger-100);
+}
+
+.info {
+  background-color: var(--pb-info-100);
+  color: var(--pb-info-700);
+  border-color: var(--pb-info-100);
+}
+
+/* Dot variant fills */
+.dot.default  { background-color: var(--pb-stone-400); border-color: var(--pb-stone-200); }
+.dot.primary  { background-color: var(--pb-primary-500); border-color: var(--pb-primary-200); }
+.dot.success  { background-color: var(--pb-success-500); border-color: var(--pb-success-100); }
+.dot.warning  { background-color: var(--pb-warning-500); border-color: var(--pb-warning-100); }
+.dot.danger   { background-color: var(--pb-danger-500); border-color: var(--pb-danger-100); }
+.dot.info     { background-color: var(--pb-info-500); border-color: var(--pb-info-100); }

@@ -1,0 +1,90 @@
+.card {
+  border-radius: var(--pb-radius-xl);
+  overflow: hidden;
+  font-family: var(--pb-font-sans);
+  transition:
+    box-shadow var(--pb-ease-base),
+    transform var(--pb-ease-base),
+    border-color var(--pb-ease-base);
+}
+
+/* ─── Variants ──────────────────────────────────────────────────────────── */
+
+.default {
+  background-color: var(--pb-bg-surface);
+  border: 1.5px solid var(--pb-stone-200);
+  box-shadow: var(--pb-shadow-xs);
+}
+
+.elevated {
+  background-color: var(--pb-bg-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--pb-shadow-md);
+}
+
+.bordered {
+  background-color: var(--pb-bg-surface);
+  border: 2px solid var(--pb-stone-200);
+  box-shadow: none;
+}
+
+.flat {
+  background-color: var(--pb-bg-subtle);
+  border: 1.5px solid transparent;
+  box-shadow: none;
+}
+
+/* ─── Interactive states ─────────────────────────────────────────────────── */
+
+.hoverable:hover {
+  box-shadow: var(--pb-shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--pb-stone-300);
+}
+
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.clickable:hover {
+  box-shadow: var(--pb-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.clickable:active {
+  transform: translateY(0);
+  box-shadow: var(--pb-shadow-sm);
+}
+
+.clickable:focus-visible {
+  box-shadow: var(--pb-focus-ring), var(--pb-shadow-md);
+  outline: none;
+}
+
+/* ─── Sub-components ─────────────────────────────────────────────────────── */
+
+.header {
+  padding: var(--pb-space-4) var(--pb-space-5);
+  border-bottom: 1px solid var(--pb-stone-100);
+  font-size: var(--pb-text-sm);
+  font-weight: var(--pb-font-semibold);
+  color: var(--pb-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.body {
+  padding: var(--pb-space-5);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-primary);
+  line-height: var(--pb-leading-relaxed);
+}
+
+.footer {
+  padding: var(--pb-space-4) var(--pb-space-5);
+  border-top: 1px solid var(--pb-stone-100);
+  background-color: var(--pb-bg-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--pb-space-3);
+}

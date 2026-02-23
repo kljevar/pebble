@@ -1,0 +1,96 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pb-radius-full);
+  overflow: hidden;
+  background-color: var(--pb-primary-100);
+  color: var(--pb-primary-700);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
+
+.xs { width: 24px; height: 24px; }
+.sm { width: 32px; height: 32px; }
+.md { width: 40px; height: 40px; }
+.lg { width: 56px; height: 56px; }
+.xl { width: 72px; height: 72px; }
+
+/* ─── Image ──────────────────────────────────────────────────────────────── */
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* ─── Initials ───────────────────────────────────────────────────────────── */
+
+.initials {
+  font-family: var(--pb-font-sans);
+  font-weight: var(--pb-font-semibold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.xs .initials { font-size: 9px; }
+.sm .initials { font-size: 11px; }
+.md .initials { font-size: 14px; }
+.lg .initials { font-size: 18px; }
+.xl .initials { font-size: 22px; }
+
+/* ─── Fallback icon ──────────────────────────────────────────────────────── */
+
+.fallbackIcon {
+  width: 55%;
+  height: 55%;
+  color: var(--pb-primary-400);
+}
+
+/* ─── Status indicator ───────────────────────────────────────────────────── */
+
+.status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: var(--pb-radius-full);
+  border: 2px solid var(--pb-bg-surface);
+  width: 28%;
+  height: 28%;
+  min-width: 8px;
+  min-height: 8px;
+  max-width: 14px;
+  max-height: 14px;
+}
+
+.status-online  { background-color: var(--pb-success-500); }
+.status-offline { background-color: var(--pb-stone-400); }
+.status-busy    { background-color: var(--pb-danger-500); }
+.status-away    { background-color: var(--pb-warning-500); }
+
+/* ─── Overflow badge ─────────────────────────────────────────────────────── */
+
+.overflow {
+  background-color: var(--pb-stone-200);
+  color: var(--pb-stone-600);
+}
+
+/* ─── Avatar group ───────────────────────────────────────────────────────── */
+
+.group {
+  display: flex;
+  flex-direction: row;
+}
+
+.group > * {
+  border: 2px solid var(--pb-bg-surface);
+  margin-left: -8px;
+}
+
+.group > *:first-child {
+  margin-left: 0;
+}
