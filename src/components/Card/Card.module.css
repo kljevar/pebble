@@ -12,7 +12,7 @@
 
 .default {
   background-color: var(--pb-bg-surface);
-  border: 1.5px solid var(--pb-stone-200);
+  border: 1.5px solid var(--pb-surface-border);
   box-shadow: var(--pb-shadow-xs);
 }
 
@@ -24,7 +24,7 @@
 
 .bordered {
   background-color: var(--pb-bg-surface);
-  border: 2px solid var(--pb-stone-200);
+  border: 2px solid var(--pb-surface-border);
   box-shadow: none;
 }
 
@@ -39,7 +39,7 @@
 .hoverable:hover {
   box-shadow: var(--pb-shadow-lg);
   transform: translateY(-2px);
-  border-color: var(--pb-stone-300);
+  border-color: var(--pb-border-color);
 }
 
 .clickable {
@@ -66,7 +66,7 @@
 
 .header {
   padding: var(--pb-space-4) var(--pb-space-5);
-  border-bottom: 1px solid var(--pb-stone-100);
+  border-bottom: 1px solid var(--pb-surface-border);
   font-size: var(--pb-text-sm);
   font-weight: var(--pb-font-semibold);
   color: var(--pb-text-primary);
@@ -82,7 +82,7 @@
 
 .footer {
   padding: var(--pb-space-4) var(--pb-space-5);
-  border-top: 1px solid var(--pb-stone-100);
+  border-top: 1px solid var(--pb-surface-border);
   background-color: var(--pb-bg-subtle);
   display: flex;
   align-items: center;

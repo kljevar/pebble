@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--pb-radius-sm);
-  border: 1.5px solid var(--pb-stone-400);
+  border: 1.5px solid var(--pb-border-color);
   background-color: var(--pb-bg-surface);
   transition:
     background-color var(--pb-ease-base),
@@ -99,12 +99,12 @@
 /* Disabled */
 .input:disabled ~ .checkboxBox {
   background-color: var(--pb-bg-disabled);
-  border-color: var(--pb-stone-300);
+  border-color: var(--pb-text-disabled);
 }
 
 .input:disabled:checked ~ .checkboxBox {
-  background-color: var(--pb-stone-300);
-  border-color: var(--pb-stone-300);
+  background-color: var(--pb-bg-muted);
+  border-color: var(--pb-bg-muted);
 }
 
 /* ─── Checkmark & dash icons ─────────────────────────────────────────────── */

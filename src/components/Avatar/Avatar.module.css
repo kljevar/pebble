@@ -94,3 +94,35 @@
 .group > *:first-child {
   margin-left: 0;
 }
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .avatar {
+  background-color: var(--pb-primary-700);
+  color: var(--pb-primary-100);
+}
+
+:global([data-theme="dark"]) .fallbackIcon {
+  color: var(--pb-primary-300);
+}
+
+:global([data-theme="dark"]) .overflow {
+  background-color: var(--pb-stone-700);
+  color: var(--pb-stone-200);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .avatar {
+    background-color: var(--pb-primary-700);
+    color: var(--pb-primary-100);
+  }
+
+  :global(:root:not([data-theme="light"])) .fallbackIcon {
+    color: var(--pb-primary-300);
+  }
+
+  :global(:root:not([data-theme="light"])) .overflow {
+    background-color: var(--pb-stone-700);
+    color: var(--pb-stone-200);
+  }
+}

@@ -9,7 +9,7 @@
   font-family: var(--pb-font-sans);
   font-size: var(--pb-text-sm);
   font-weight: var(--pb-font-medium);
-  color: var(--pb-stone-700);
+  color: var(--pb-label-color);
   line-height: var(--pb-leading-snug);
   letter-spacing: -0.01em;
 }
@@ -87,7 +87,7 @@
 }
 
 .input::placeholder {
-  color: var(--pb-stone-400);
+  color: var(--pb-icon-color);
 }
 
 .input:disabled {
@@ -110,7 +110,7 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--pb-stone-400);
+  color: var(--pb-icon-color);
   line-height: 0;
 }
 

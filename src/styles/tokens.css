@@ -148,4 +148,60 @@
   --pb-bg-subtle:    var(--pb-stone-50);
   --pb-bg-muted:     var(--pb-stone-100);
   --pb-bg-disabled:  var(--pb-stone-100);
+
+  --pb-surface-border: var(--pb-stone-200);  /* card/modal dividers */
+  --pb-icon-color:     var(--pb-stone-400);  /* input icons & placeholders */
+  --pb-label-color:    var(--pb-stone-700);  /* form labels */
+}
+
+/* ─── Dark Mode ────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --pb-border-color:       var(--pb-stone-700);
+  --pb-border-color-focus: var(--pb-primary-400);
+  --pb-border-color-error: var(--pb-danger-500);
+
+  --pb-text-primary:   var(--pb-stone-50);
+  --pb-text-secondary: var(--pb-stone-400);
+  --pb-text-disabled:  var(--pb-stone-600);
+  --pb-text-error:     var(--pb-danger-500);
+  --pb-text-success:   var(--pb-success-500);
+
+  --pb-bg-surface:  var(--pb-stone-900);
+  --pb-bg-subtle:   var(--pb-stone-800);
+  --pb-bg-muted:    var(--pb-stone-700);
+  --pb-bg-disabled: var(--pb-stone-800);
+
+  --pb-focus-ring:        0 0 0 3px rgba(129, 140, 248, 0.4);
+  --pb-focus-ring-danger: 0 0 0 3px rgba(244, 63, 94, 0.4);
+
+  --pb-surface-border: var(--pb-stone-700);
+  --pb-icon-color:     var(--pb-stone-500);
+  --pb-label-color:    var(--pb-stone-300);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pb-border-color:       var(--pb-stone-700);
+    --pb-border-color-focus: var(--pb-primary-400);
+    --pb-border-color-error: var(--pb-danger-500);
+
+    --pb-text-primary:   var(--pb-stone-50);
+    --pb-text-secondary: var(--pb-stone-400);
+    --pb-text-disabled:  var(--pb-stone-600);
+    --pb-text-error:     var(--pb-danger-500);
+    --pb-text-success:   var(--pb-success-500);
+
+    --pb-bg-surface:  var(--pb-stone-900);
+    --pb-bg-subtle:   var(--pb-stone-800);
+    --pb-bg-muted:    var(--pb-stone-700);
+    --pb-bg-disabled: var(--pb-stone-800);
+
+    --pb-focus-ring:        0 0 0 3px rgba(129, 140, 248, 0.4);
+    --pb-focus-ring-danger: 0 0 0 3px rgba(244, 63, 94, 0.4);
+
+    --pb-surface-border: var(--pb-stone-700);
+    --pb-icon-color:     var(--pb-stone-500);
+    --pb-label-color:    var(--pb-stone-300);
+  }
 }
