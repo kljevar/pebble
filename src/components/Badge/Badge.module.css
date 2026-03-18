@@ -1,14 +1,18 @@
+/* iOS 26 Liquid Glass — pill badges with glass tints and gradient borders */
+
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--pb-font-sans);
-  font-weight: var(--pb-font-medium);
+  font-weight: var(--pb-font-semibold);
   border-radius: var(--pb-radius-full);
   white-space: nowrap;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   line-height: 1;
   border: 1px solid transparent;
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
 }
 
 /* ─── Sizes ─────────────────────────────────────────────────────────────── */
@@ -26,126 +30,128 @@
 /* ─── Dot variant ────────────────────────────────────────────────────────── */
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   padding: 0;
   border-radius: var(--pb-radius-full);
   border-width: 1.5px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .dot.md {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 /* ─── Variants ──────────────────────────────────────────────────────────── */
 
 .default {
-  background-color: var(--pb-stone-100);
+  background: rgba(241, 241, 246, 0.82);
+  border-color: rgba(160, 160, 185, 0.55);
   color: var(--pb-stone-700);
-  border-color: var(--pb-stone-200);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .primary {
-  background-color: var(--pb-primary-100);
-  color: var(--pb-primary-700);
-  border-color: var(--pb-primary-200);
+  background: var(--pb-gradient-primary);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 1px 8px rgba(129, 140, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .success {
-  background-color: var(--pb-success-100);
+  background: rgba(220, 252, 231, 0.88);
+  border-color: rgba(34, 197, 94, 0.45);
   color: var(--pb-success-700);
-  border-color: var(--pb-success-100);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 6px rgba(34, 197, 94, 0.12);
 }
 
 .warning {
-  background-color: var(--pb-warning-100);
+  background: rgba(254, 243, 199, 0.88);
+  border-color: rgba(245, 158, 11, 0.45);
   color: var(--pb-warning-700);
-  border-color: var(--pb-warning-100);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 6px rgba(245, 158, 11, 0.12);
 }
 
 .danger {
-  background-color: var(--pb-danger-100);
+  background: rgba(255, 228, 230, 0.88);
+  border-color: rgba(244, 63, 94, 0.45);
   color: var(--pb-danger-700);
-  border-color: var(--pb-danger-100);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 6px rgba(244, 63, 94, 0.12);
 }
 
 .info {
-  background-color: var(--pb-info-100);
+  background: rgba(224, 242, 254, 0.88);
+  border-color: rgba(14, 165, 233, 0.45);
   color: var(--pb-info-700);
-  border-color: var(--pb-info-100);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 6px rgba(14, 165, 233, 0.12);
 }
 
-/* Dot variant fills */
-.dot.default  { background-color: var(--pb-stone-400); border-color: var(--pb-stone-200); }
-.dot.primary  { background-color: var(--pb-primary-500); border-color: var(--pb-primary-200); }
-.dot.success  { background-color: var(--pb-success-500); border-color: var(--pb-success-100); }
-.dot.warning  { background-color: var(--pb-warning-500); border-color: var(--pb-warning-100); }
-.dot.danger   { background-color: var(--pb-danger-500); border-color: var(--pb-danger-100); }
-.dot.info     { background-color: var(--pb-info-500); border-color: var(--pb-info-100); }
+/* Dot fills with subtle glow */
+.dot.default { background: var(--pb-stone-300); border-color: transparent; }
+.dot.primary { background: #818cf8; border-color: rgba(129,140,248,0.3); box-shadow: 0 0 6px rgba(129,140,248,0.5); }
+.dot.success { background: var(--pb-success-500); border-color: rgba(34,197,94,0.3); box-shadow: 0 0 6px rgba(34,197,94,0.45); }
+.dot.warning { background: var(--pb-warning-500); border-color: rgba(245,158,11,0.3); box-shadow: 0 0 6px rgba(245,158,11,0.45); }
+.dot.danger  { background: var(--pb-danger-500); border-color: rgba(244,63,94,0.3); box-shadow: 0 0 6px rgba(244,63,94,0.45); }
+.dot.info    { background: var(--pb-info-500); border-color: rgba(14,165,233,0.3); box-shadow: 0 0 6px rgba(14,165,233,0.45); }
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
 :global([data-theme="dark"]) .default {
-  background-color: var(--pb-stone-800);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
   color: var(--pb-stone-300);
-  border-color: var(--pb-stone-700);
 }
-:global([data-theme="dark"]) .primary {
-  background-color: var(--pb-primary-900);
-  color: var(--pb-primary-200);
-  border-color: var(--pb-primary-800);
-}
+
 :global([data-theme="dark"]) .success {
-  background-color: var(--pb-success-700);
-  color: var(--pb-success-100);
-  border-color: var(--pb-success-700);
+  background: rgba(21, 128, 61, 0.3);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #bbf7d0;
 }
+
 :global([data-theme="dark"]) .warning {
-  background-color: var(--pb-warning-700);
-  color: var(--pb-warning-100);
-  border-color: var(--pb-warning-700);
+  background: rgba(180, 83, 9, 0.3);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fde68a;
 }
+
 :global([data-theme="dark"]) .danger {
-  background-color: var(--pb-danger-700);
-  color: var(--pb-danger-100);
-  border-color: var(--pb-danger-700);
+  background: rgba(190, 18, 60, 0.3);
+  border-color: rgba(244, 63, 94, 0.5);
+  color: #fecdd3;
 }
+
 :global([data-theme="dark"]) .info {
-  background-color: var(--pb-info-700);
-  color: var(--pb-info-100);
-  border-color: var(--pb-info-700);
+  background: rgba(3, 105, 161, 0.3);
+  border-color: rgba(14, 165, 233, 0.5);
+  color: #bae6fd;
 }
 
 @media (prefers-color-scheme: dark) {
   :global(:root:not([data-theme="light"])) .default {
-    background-color: var(--pb-stone-800);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.18);
     color: var(--pb-stone-300);
-    border-color: var(--pb-stone-700);
-  }
-  :global(:root:not([data-theme="light"])) .primary {
-    background-color: var(--pb-primary-900);
-    color: var(--pb-primary-200);
-    border-color: var(--pb-primary-800);
   }
   :global(:root:not([data-theme="light"])) .success {
-    background-color: var(--pb-success-700);
-    color: var(--pb-success-100);
-    border-color: var(--pb-success-700);
+    background: rgba(21, 128, 61, 0.3);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #bbf7d0;
   }
   :global(:root:not([data-theme="light"])) .warning {
-    background-color: var(--pb-warning-700);
-    color: var(--pb-warning-100);
-    border-color: var(--pb-warning-700);
+    background: rgba(180, 83, 9, 0.3);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #fde68a;
   }
   :global(:root:not([data-theme="light"])) .danger {
-    background-color: var(--pb-danger-700);
-    color: var(--pb-danger-100);
-    border-color: var(--pb-danger-700);
+    background: rgba(190, 18, 60, 0.3);
+    border-color: rgba(244, 63, 94, 0.5);
+    color: #fecdd3;
   }
   :global(:root:not([data-theme="light"])) .info {
-    background-color: var(--pb-info-700);
-    color: var(--pb-info-100);
-    border-color: var(--pb-info-700);
+    background: rgba(3, 105, 161, 0.3);
+    border-color: rgba(14, 165, 233, 0.5);
+    color: #bae6fd;
   }
 }

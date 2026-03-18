@@ -1,3 +1,5 @@
+/* iOS 26 Liquid Glass — glass box, gradient fill, spring checkmark */
+
 .wrapper {
   display: inline-flex;
   flex-direction: column;
@@ -29,7 +31,7 @@
   font-size: var(--pb-text-sm);
 }
 
-/* ─── Checkbox outer (positions the box over the hidden input) ───────────── */
+/* ─── Checkbox outer ─────────────────────────────────────────────────────── */
 
 .checkboxOuter {
   position: relative;
@@ -62,52 +64,64 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--pb-radius-sm);
-  border: 1.5px solid var(--pb-border-color);
-  background-color: var(--pb-bg-surface);
+  border-radius: var(--pb-radius-md);
+  background:
+    rgba(255, 255, 255, 0.72) padding-box,
+    linear-gradient(135deg, rgba(200, 200, 210, 0.45), rgba(180, 180, 195, 0.28)) border-box;
+  border: 1.5px solid transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition:
-    background-color var(--pb-ease-base),
-    border-color var(--pb-ease-base),
+    background var(--pb-ease-spring-bounce),
     box-shadow var(--pb-ease-base);
   pointer-events: none;
 }
 
 /* Hover (unchecked) */
 .input:hover:not(:disabled) ~ .checkboxBox {
-  border-color: var(--pb-primary-500);
+  background:
+    rgba(255, 255, 255, 0.88) padding-box,
+    linear-gradient(135deg, rgba(96, 165, 250, 0.5), rgba(168, 85, 247, 0.5)) border-box;
 }
 
 /* Focus */
 .input:focus-visible ~ .checkboxBox {
   box-shadow: var(--pb-focus-ring);
-  border-color: var(--pb-primary-500);
+  background:
+    rgba(255, 255, 255, 0.88) padding-box,
+    linear-gradient(135deg, rgba(96, 165, 250, 0.65), rgba(168, 85, 247, 0.65)) border-box;
   outline: none;
 }
 
 /* Checked */
 .input:checked ~ .checkboxBox {
-  background-color: var(--pb-primary-600);
-  border-color: var(--pb-primary-600);
+  background: var(--pb-gradient-primary);
+  border-color: transparent;
+  box-shadow: 0 1px 8px rgba(129, 140, 248, 0.4);
 }
 
 /* Indeterminate */
 .input:indeterminate ~ .checkboxBox {
-  background-color: var(--pb-primary-600);
-  border-color: var(--pb-primary-600);
+  background: var(--pb-gradient-primary);
+  border-color: transparent;
+  box-shadow: 0 1px 8px rgba(129, 140, 248, 0.4);
 }
 
 /* Disabled */
 .input:disabled ~ .checkboxBox {
-  background-color: var(--pb-bg-disabled);
-  border-color: var(--pb-text-disabled);
+  background: var(--pb-bg-disabled);
+  border: 1.5px solid var(--pb-text-disabled);
+  backdrop-filter: none;
+  box-shadow: none;
 }
 
 .input:disabled:checked ~ .checkboxBox {
-  background-color: var(--pb-bg-muted);
-  border-color: var(--pb-bg-muted);
+  background: var(--pb-bg-muted);
+  border-color: transparent;
+  box-shadow: none;
 }
 
-/* ─── Checkmark & dash icons ─────────────────────────────────────────────── */
+/* ─── Checkmark & dash — spring in on check ──────────────────────────────── */
 
 .checkmark,
 .dash {
@@ -115,16 +129,21 @@
   height: 70%;
   color: #ffffff;
   opacity: 0;
-  transition: opacity var(--pb-ease-fast);
+  transform: scale(0.5);
+  transition:
+    opacity var(--pb-ease-spring-bounce),
+    transform var(--pb-ease-spring-bounce);
   position: absolute;
 }
 
 .input:checked ~ .checkboxBox .checkmark {
   opacity: 1;
+  transform: scale(1);
 }
 
 .input:indeterminate ~ .checkboxBox .dash {
   opacity: 1;
+  transform: scale(1);
 }
 
 /* ─── Label ──────────────────────────────────────────────────────────────── */
@@ -148,9 +167,36 @@
   font-size: var(--pb-text-xs);
   color: var(--pb-text-secondary);
   line-height: var(--pb-leading-snug);
-  padding-left: calc(18px + var(--pb-space-2)); /* align with label */
+  padding-left: calc(18px + var(--pb-space-2));
 }
 
 .sm .helperText {
   padding-left: calc(14px + var(--pb-space-2));
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .checkboxBox {
+  background:
+    rgba(255, 255, 255, 0.07) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)) border-box;
+}
+
+:global([data-theme="dark"]) .input:hover:not(:disabled) ~ .checkboxBox {
+  background:
+    rgba(255, 255, 255, 0.12) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .checkboxBox {
+    background:
+      rgba(255, 255, 255, 0.07) padding-box,
+      linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)) border-box;
+  }
+  :global(:root:not([data-theme="light"])) .input:hover:not(:disabled) ~ .checkboxBox {
+    background:
+      rgba(255, 255, 255, 0.12) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+  }
 }

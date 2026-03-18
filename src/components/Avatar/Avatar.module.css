@@ -1,3 +1,5 @@
+/* iOS 26 Liquid Glass — gradient ring on hover, status dot glows */
+
 .avatar {
   position: relative;
   display: inline-flex;
@@ -5,10 +7,17 @@
   justify-content: center;
   border-radius: var(--pb-radius-full);
   overflow: hidden;
-  background-color: var(--pb-primary-100);
+  background: linear-gradient(135deg, rgba(96,165,250,0.18) 0%, rgba(129,140,248,0.18) 50%, rgba(168,85,247,0.18) 100%);
   color: var(--pb-primary-700);
   flex-shrink: 0;
   user-select: none;
+  transition: box-shadow var(--pb-ease-spring-bounce);
+}
+
+.avatar:hover {
+  box-shadow:
+    0 0 0 2px var(--pb-bg-surface),
+    0 0 0 4px rgba(129, 140, 248, 0.45);
 }
 
 /* ─── Sizes ─────────────────────────────────────────────────────────────── */
@@ -67,16 +76,30 @@
   max-height: 14px;
 }
 
-.status-online  { background-color: var(--pb-success-500); }
+.status-online  {
+  background-color: var(--pb-success-500);
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
 .status-offline { background-color: var(--pb-stone-400); }
-.status-busy    { background-color: var(--pb-danger-500); }
-.status-away    { background-color: var(--pb-warning-500); }
+.status-busy    {
+  background-color: var(--pb-danger-500);
+  box-shadow: 0 0 6px rgba(244, 63, 94, 0.55);
+}
+.status-away    {
+  background-color: var(--pb-warning-500);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.55);
+}
 
 /* ─── Overflow badge ─────────────────────────────────────────────────────── */
 
 .overflow {
-  background-color: var(--pb-stone-200);
+  background:
+    rgba(255, 255, 255, 0.65) padding-box,
+    linear-gradient(135deg, rgba(200,200,210,0.45), rgba(180,180,195,0.28)) border-box;
+  border: 1px solid transparent;
   color: var(--pb-stone-600);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ─── Avatar group ───────────────────────────────────────────────────────── */
@@ -98,8 +121,8 @@
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
 :global([data-theme="dark"]) .avatar {
-  background-color: var(--pb-primary-700);
-  color: var(--pb-primary-100);
+  background: linear-gradient(135deg, rgba(96,165,250,0.12) 0%, rgba(129,140,248,0.12) 50%, rgba(168,85,247,0.12) 100%);
+  color: var(--pb-primary-200);
 }
 
 :global([data-theme="dark"]) .fallbackIcon {
@@ -107,22 +130,24 @@
 }
 
 :global([data-theme="dark"]) .overflow {
-  background-color: var(--pb-stone-700);
+  background:
+    rgba(255,255,255,0.07) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05)) border-box;
   color: var(--pb-stone-200);
 }
 
 @media (prefers-color-scheme: dark) {
   :global(:root:not([data-theme="light"])) .avatar {
-    background-color: var(--pb-primary-700);
-    color: var(--pb-primary-100);
+    background: linear-gradient(135deg, rgba(96,165,250,0.12) 0%, rgba(129,140,248,0.12) 50%, rgba(168,85,247,0.12) 100%);
+    color: var(--pb-primary-200);
   }
-
   :global(:root:not([data-theme="light"])) .fallbackIcon {
     color: var(--pb-primary-300);
   }
-
   :global(:root:not([data-theme="light"])) .overflow {
-    background-color: var(--pb-stone-700);
+    background:
+      rgba(255,255,255,0.07) padding-box,
+      linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05)) border-box;
     color: var(--pb-stone-200);
   }
 }

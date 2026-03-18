@@ -1,8 +1,11 @@
+/* iOS 26 Liquid Glass — glass panel, strong blur backdrop, spring entrance */
+
 .backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,15 +16,23 @@
 
 .dialog {
   position: relative;
-  background-color: var(--pb-bg-surface);
-  border-radius: var(--pb-radius-xl);
-  box-shadow: var(--pb-shadow-xl);
+  background:
+    rgba(255, 255, 255, 0.82) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.35), rgba(129,140,248,0.22), rgba(168,85,247,0.35)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-radius: var(--pb-radius-3xl);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - var(--pb-space-8));
   overflow: hidden;
   outline: none;
-  animation: pb-dialog-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: pb-dialog-in 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 /* ─── Sizes ─────────────────────────────────────────────────────────────── */
@@ -34,7 +45,7 @@
   height: calc(100vh - var(--pb-space-8));
   max-width: none;
   max-height: none;
-  border-radius: var(--pb-radius-lg);
+  border-radius: var(--pb-radius-2xl);
 }
 
 /* ─── Close button ───────────────────────────────────────────────────────── */
@@ -48,20 +59,33 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--pb-radius-md);
-  border: none;
-  background: transparent;
+  border-radius: var(--pb-radius-full);
+  border: 1px solid transparent;
+  background:
+    rgba(255, 255, 255, 0.6) padding-box,
+    linear-gradient(135deg, rgba(200,200,210,0.4), rgba(180,180,195,0.25)) border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--pb-text-secondary);
   cursor: pointer;
   transition:
-    background-color var(--pb-ease-base),
+    transform var(--pb-ease-spring-bounce),
+    background var(--pb-ease-base),
     color var(--pb-ease-base);
   z-index: 1;
 }
 
 .closeBtn:hover {
-  background-color: var(--pb-bg-muted);
+  background:
+    rgba(255, 255, 255, 0.88) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.45), rgba(168,85,247,0.45)) border-box;
   color: var(--pb-text-primary);
+  transform: scale(1.08);
+}
+
+.closeBtn:active {
+  transform: scale(0.94);
+  transition: transform var(--pb-ease-press);
 }
 
 .closeBtn:focus-visible {
@@ -106,7 +130,6 @@
   line-height: var(--pb-leading-relaxed);
 }
 
-/* When there's a header, give body some top breathing room */
 .header + .body {
   padding-top: var(--pb-space-4);
 }
@@ -115,7 +138,8 @@
 
 .footer {
   padding: var(--pb-space-4) var(--pb-space-6);
-  border-top: 1px solid var(--pb-surface-border);
+  border-top: 1px solid rgba(200, 200, 210, 0.3);
+  background: rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -133,10 +157,76 @@
 @keyframes pb-dialog-in {
   from {
     opacity: 0;
-    transform: scale(0.94) translateY(8px);
+    transform: scale(0.9) translateY(16px);
   }
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+:global([data-theme="dark"]) .dialog {
+  background:
+    rgba(20, 20, 28, 0.88) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.28), rgba(129,140,248,0.16), rgba(168,85,247,0.28)) border-box;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.5),
+    0 8px 20px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+:global([data-theme="dark"]) .closeBtn {
+  background:
+    rgba(255,255,255,0.07) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
+  color: var(--pb-stone-400);
+}
+
+:global([data-theme="dark"]) .closeBtn:hover {
+  background:
+    rgba(255,255,255,0.13) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+  color: var(--pb-stone-100);
+}
+
+:global([data-theme="dark"]) .footer {
+  border-top-color: rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  :global(:root:not([data-theme="light"])) .dialog {
+    background:
+      rgba(20, 20, 28, 0.88) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.28), rgba(129,140,248,0.16), rgba(168,85,247,0.28)) border-box;
+    box-shadow:
+      0 24px 60px rgba(0,0,0,0.5),
+      0 8px 20px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  :global(:root:not([data-theme="light"])) .closeBtn {
+    background:
+      rgba(255,255,255,0.07) padding-box,
+      linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
+    color: var(--pb-stone-400);
+  }
+  :global(:root:not([data-theme="light"])) .closeBtn:hover {
+    background:
+      rgba(255,255,255,0.13) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+    color: var(--pb-stone-100);
+  }
+  :global(:root:not([data-theme="light"])) .footer {
+    border-top-color: rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.2);
   }
 }

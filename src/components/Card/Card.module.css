@@ -1,45 +1,65 @@
+/* iOS 26 Liquid Glass — glass surface, gradient borders, spring hover */
+
 .card {
-  border-radius: var(--pb-radius-xl);
+  border-radius: var(--pb-radius-2xl);
   overflow: hidden;
   font-family: var(--pb-font-sans);
   transition:
-    box-shadow var(--pb-ease-base),
-    transform var(--pb-ease-base),
-    border-color var(--pb-ease-base);
+    box-shadow var(--pb-ease-spring-bounce),
+    transform var(--pb-ease-spring-bounce),
+    background var(--pb-ease-base);
 }
 
 /* ─── Variants ──────────────────────────────────────────────────────────── */
 
 .default {
-  background-color: var(--pb-bg-surface);
-  border: 1.5px solid var(--pb-surface-border);
-  box-shadow: var(--pb-shadow-xs);
+  background:
+    rgba(255, 255, 255, 0.72) padding-box,
+    linear-gradient(135deg, rgba(200,200,210,0.45), rgba(180,180,200,0.28)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 .elevated {
-  background-color: var(--pb-bg-surface);
+  background:
+    rgba(255, 255, 255, 0.82) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.3), rgba(129,140,248,0.18), rgba(168,85,247,0.3)) border-box;
   border: 1px solid transparent;
-  box-shadow: var(--pb-shadow-md);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.1),
+    0 1px 4px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .bordered {
-  background-color: var(--pb-bg-surface);
-  border: 2px solid var(--pb-surface-border);
-  box-shadow: none;
+  background:
+    rgba(255, 255, 255, 0.72) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.5), rgba(129,140,248,0.32), rgba(168,85,247,0.5)) border-box;
+  border: 1.5px solid transparent;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
 }
 
 .flat {
-  background-color: var(--pb-bg-subtle);
-  border: 1.5px solid transparent;
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ─── Interactive states ─────────────────────────────────────────────────── */
 
 .hoverable:hover {
-  box-shadow: var(--pb-shadow-lg);
-  transform: translateY(-2px);
-  border-color: var(--pb-border-color);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow:
+    0 8px 30px rgba(129, 140, 248, 0.18),
+    0 2px 8px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .clickable {
@@ -48,17 +68,23 @@
 }
 
 .clickable:hover {
-  box-shadow: var(--pb-shadow-lg);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow:
+    0 8px 30px rgba(129, 140, 248, 0.18),
+    0 2px 8px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .clickable:active {
-  transform: translateY(0);
-  box-shadow: var(--pb-shadow-sm);
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition:
+    transform var(--pb-ease-press),
+    box-shadow var(--pb-ease-base);
 }
 
 .clickable:focus-visible {
-  box-shadow: var(--pb-focus-ring), var(--pb-shadow-md);
+  box-shadow: var(--pb-focus-ring), 0 4px 20px rgba(0,0,0,0.1);
   outline: none;
 }
 
@@ -66,7 +92,7 @@
 
 .header {
   padding: var(--pb-space-4) var(--pb-space-5);
-  border-bottom: 1px solid var(--pb-surface-border);
+  border-bottom: 1px solid rgba(200, 200, 210, 0.3);
   font-size: var(--pb-text-sm);
   font-weight: var(--pb-font-semibold);
   color: var(--pb-text-primary);
@@ -82,9 +108,74 @@
 
 .footer {
   padding: var(--pb-space-4) var(--pb-space-5);
-  border-top: 1px solid var(--pb-surface-border);
-  background-color: var(--pb-bg-subtle);
+  border-top: 1px solid rgba(200, 200, 210, 0.3);
+  background: rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   gap: var(--pb-space-3);
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .default {
+  background:
+    rgba(255,255,255,0.05) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+:global([data-theme="dark"]) .elevated {
+  background:
+    rgba(255,255,255,0.07) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.22), rgba(129,140,248,0.14), rgba(168,85,247,0.22)) border-box;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+:global([data-theme="dark"]) .bordered {
+  background:
+    rgba(255,255,255,0.05) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.35), rgba(129,140,248,0.22), rgba(168,85,247,0.35)) border-box;
+}
+
+:global([data-theme="dark"]) .flat {
+  background: rgba(255,255,255,0.04);
+}
+
+:global([data-theme="dark"]) .header {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+:global([data-theme="dark"]) .footer {
+  border-top-color: rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .default {
+    background:
+      rgba(255,255,255,0.05) padding-box,
+      linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  :global(:root:not([data-theme="light"])) .elevated {
+    background:
+      rgba(255,255,255,0.07) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.22), rgba(129,140,248,0.14), rgba(168,85,247,0.22)) border-box;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  :global(:root:not([data-theme="light"])) .bordered {
+    background:
+      rgba(255,255,255,0.05) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.35), rgba(129,140,248,0.22), rgba(168,85,247,0.35)) border-box;
+  }
+  :global(:root:not([data-theme="light"])) .flat {
+    background: rgba(255,255,255,0.04);
+  }
+  :global(:root:not([data-theme="light"])) .header {
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  :global(:root:not([data-theme="light"])) .footer {
+    border-top-color: rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.15);
+  }
 }

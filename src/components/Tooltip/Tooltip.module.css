@@ -1,3 +1,5 @@
+/* iOS 26 Liquid Glass — dark frosted glass tooltip */
+
 .wrapper {
   position: relative;
   display: inline-flex;
@@ -10,25 +12,33 @@
 .tooltip {
   position: absolute;
   z-index: var(--pb-z-tooltip);
-  background-color: var(--pb-stone-900);
-  color: #ffffff;
+  background:
+    rgba(18, 18, 24, 0.82) padding-box,
+    linear-gradient(135deg, rgba(129,140,248,0.25), rgba(168,85,247,0.15), rgba(96,165,250,0.25)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  color: rgba(255, 255, 255, 0.92);
   font-family: var(--pb-font-sans);
   font-size: var(--pb-text-xs);
   font-weight: var(--pb-font-medium);
   line-height: var(--pb-leading-snug);
-  padding: 5px var(--pb-space-2);
-  border-radius: var(--pb-radius-md);
+  padding: 6px var(--pb-space-3);
+  border-radius: var(--pb-radius-xl);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--pb-ease-base), transform var(--pb-ease-base);
-  box-shadow: var(--pb-shadow-lg);
+  transition:
+    opacity var(--pb-ease-base),
+    transform var(--pb-ease-spring-bounce);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   max-width: 220px;
   white-space: normal;
   text-align: center;
 }
 
-/* Show on hover or when the child has focus */
 .wrapper:hover .tooltip,
 .wrapper:focus-within .tooltip {
   opacity: 1;
@@ -46,9 +56,9 @@
 
 /* Top */
 .top {
-  bottom: calc(100% + 6px);
+  bottom: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%) translateY(6px);
 }
 .wrapper:hover .top,
 .wrapper:focus-within .top {
@@ -60,14 +70,14 @@
   transform: translateX(-50%);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid var(--pb-stone-900);
+  border-top: 5px solid rgba(18, 18, 24, 0.82);
 }
 
 /* Bottom */
 .bottom {
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%) translateY(-4px);
+  transform: translateX(-50%) translateY(-6px);
 }
 .wrapper:hover .bottom,
 .wrapper:focus-within .bottom {
@@ -79,14 +89,14 @@
   transform: translateX(-50%);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid var(--pb-stone-900);
+  border-bottom: 5px solid rgba(18, 18, 24, 0.82);
 }
 
 /* Left */
 .left {
-  right: calc(100% + 6px);
+  right: calc(100% + 8px);
   top: 50%;
-  transform: translateY(-50%) translateX(4px);
+  transform: translateY(-50%) translateX(6px);
 }
 .wrapper:hover .left,
 .wrapper:focus-within .left {
@@ -98,14 +108,14 @@
   transform: translateY(-50%);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 5px solid var(--pb-stone-900);
+  border-left: 5px solid rgba(18, 18, 24, 0.82);
 }
 
 /* Right */
 .right {
-  left: calc(100% + 6px);
+  left: calc(100% + 8px);
   top: 50%;
-  transform: translateY(-50%) translateX(-4px);
+  transform: translateY(-50%) translateX(-6px);
 }
 .wrapper:hover .right,
 .wrapper:focus-within .right {
@@ -117,5 +127,5 @@
   transform: translateY(-50%);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-right: 5px solid var(--pb-stone-900);
+  border-right: 5px solid rgba(18, 18, 24, 0.82);
 }

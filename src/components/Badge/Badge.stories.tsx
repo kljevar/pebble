@@ -65,7 +65,7 @@ export const DotBadges: Story = {
 
 export const InContext: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontFamily: 'var(--pb-font-sans)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontFamily: 'var(--pb-font-sans)', minWidth: '250px' }}>
       {[
         { label: 'Deployment', status: 'Success', variant: 'success' as const },
         { label: 'API Gateway', status: 'Warning', variant: 'warning' as const },
@@ -78,6 +78,7 @@ export const InContext: Story = {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            gap: '24px',
             padding: '10px 14px',
             borderRadius: '8px',
             border: '1.5px solid var(--pb-stone-200)',

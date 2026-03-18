@@ -112,10 +112,12 @@
   --pb-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 
   /* ─── Transitions ─────────────────────────────────────────────────────── */
-  --pb-ease-fast:   100ms ease;
-  --pb-ease-base:   150ms ease;
-  --pb-ease-slow:   250ms ease;
-  --pb-ease-spring: 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pb-ease-fast:          100ms ease;
+  --pb-ease-base:          150ms ease;
+  --pb-ease-slow:          250ms ease;
+  --pb-ease-spring:        200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pb-ease-spring-bounce: 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pb-ease-press:          80ms cubic-bezier(0.4, 0, 0.6, 1);
 
   /* ─── Z-index Scale ───────────────────────────────────────────────────── */
   --pb-z-base:    0;
@@ -125,8 +127,12 @@
   --pb-z-tooltip: 1100;
   --pb-z-toast:   1200;
 
-  /* ─── Focus Ring ──────────────────────────────────────────────────────── */
-  --pb-focus-ring:        0 0 0 3px rgba(99, 102, 241, 0.35);
+  /* ─── Gradients ───────────────────────────────────────────────────────── */
+  --pb-gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --pb-gradient-danger:  linear-gradient(160deg, #fb7185 0%, #f43f5e 55%, #be123c 100%);
+
+  /* ─── Focus Ring ───────────────────────────────────────────────────────── */
+  --pb-focus-ring:        0 0 0 3px rgba(129, 140, 248, 0.4);
   --pb-focus-ring-danger: 0 0 0 3px rgba(244, 63, 94, 0.35);
 
   /* ─── Component tokens ────────────────────────────────────────────────── */

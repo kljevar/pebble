@@ -1,21 +1,19 @@
 .spinner {
   display: inline-block;
   flex-shrink: 0;
-  animation: pb-spin 0.65s linear infinite;
+  animation: pb-spin 0.7s linear infinite;
   color: currentColor;
 }
 
 .track {
   stroke: currentColor;
-  opacity: 0.2;
+  opacity: 0.15;
 }
 
 .head {
   stroke: currentColor;
 }
 
-/* Size variants — override width/height via SVG attributes,
-   these classes allow targeting specific sizes in context if needed */
 .xs { /* 12px */ }
 .sm { /* 16px */ }
 .md { /* 24px */ }

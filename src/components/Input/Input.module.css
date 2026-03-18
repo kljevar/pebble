@@ -1,3 +1,5 @@
+/* iOS 26 Liquid Glass — glass surface, gradient focus border */
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -14,51 +16,58 @@
   letter-spacing: -0.01em;
 }
 
-/* ─── Input wrapper (border / bg container) ─────────────────────────────── */
+/* ─── Input wrapper ──────────────────────────────────────────────────────── */
 
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--pb-bg-surface);
-  border: 1.5px solid var(--pb-border-color);
-  border-radius: var(--pb-radius-md);
+  background:
+    rgba(255, 255, 255, 0.72) padding-box,
+    linear-gradient(135deg, rgba(210, 210, 220, 0.5), rgba(190, 190, 205, 0.32)) border-box;
+  border: 1.5px solid transparent;
+  border-radius: var(--pb-radius-xl);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition:
-    border-color var(--pb-ease-base),
+    background var(--pb-ease-base),
     box-shadow var(--pb-ease-base);
 }
 
 .inputWrapper:focus-within:not(.error):not(.disabled) {
-  border-color: var(--pb-border-color-focus);
-  box-shadow: var(--pb-focus-ring);
+  background:
+    rgba(255, 255, 255, 0.88) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.65), rgba(129,140,248,0.45), rgba(168,85,247,0.65)) border-box;
+  box-shadow:
+    0 0 0 3px rgba(129, 140, 248, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .inputWrapper.error {
-  border-color: var(--pb-border-color-error);
+  background:
+    rgba(255, 255, 255, 0.72) padding-box,
+    linear-gradient(135deg, rgba(244,63,94,0.55), rgba(190,18,60,0.35)) border-box;
 }
 
 .inputWrapper.error:focus-within {
-  box-shadow: var(--pb-focus-ring-danger);
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.18), inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .inputWrapper.disabled {
-  background-color: var(--pb-bg-disabled);
+  background: var(--pb-bg-disabled);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
 /* ─── Sizes ─────────────────────────────────────────────────────────────── */
 
-.sm {
-  height: var(--pb-input-height-sm);
-}
-
-.md {
-  height: var(--pb-input-height-md);
-}
-
-.lg {
-  height: var(--pb-input-height-lg);
-}
+.sm { height: var(--pb-input-height-sm); }
+.md { height: var(--pb-input-height-md); }
+.lg { height: var(--pb-input-height-lg); }
 
 /* ─── The actual <input> ─────────────────────────────────────────────────── */
 
@@ -95,13 +104,8 @@
   color: var(--pb-text-disabled);
 }
 
-.input.hasLeft {
-  padding-left: var(--pb-space-1);
-}
-
-.input.hasRight {
-  padding-right: var(--pb-space-1);
-}
+.input.hasLeft  { padding-left: var(--pb-space-1); }
+.input.hasRight { padding-right: var(--pb-space-1); }
 
 /* ─── Icon slots ─────────────────────────────────────────────────────────── */
 
@@ -114,13 +118,8 @@
   line-height: 0;
 }
 
-.iconLeft {
-  padding-left: var(--pb-space-3);
-}
-
-.iconRight {
-  padding-right: var(--pb-space-3);
-}
+.iconLeft  { padding-left: var(--pb-space-3); }
+.iconRight { padding-right: var(--pb-space-3); }
 
 .iconLeft svg,
 .iconRight svg {
@@ -144,4 +143,46 @@
   font-size: var(--pb-text-xs);
   color: var(--pb-text-error);
   line-height: var(--pb-leading-snug);
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .inputWrapper {
+  background:
+    rgba(255, 255, 255, 0.06) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+:global([data-theme="dark"]) .inputWrapper:focus-within:not(.error):not(.disabled) {
+  background:
+    rgba(255, 255, 255, 0.1) padding-box,
+    linear-gradient(135deg, rgba(96,165,250,0.5), rgba(129,140,248,0.35), rgba(168,85,247,0.5)) border-box;
+  box-shadow: 0 0 0 3px rgba(129,140,248,0.2), 0 1px 3px rgba(0,0,0,0.3);
+}
+
+:global([data-theme="dark"]) .inputWrapper.error {
+  background:
+    rgba(255,255,255,0.06) padding-box,
+    linear-gradient(135deg, rgba(244,63,94,0.45), rgba(190,18,60,0.28)) border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .inputWrapper {
+    background:
+      rgba(255, 255, 255, 0.06) padding-box,
+      linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  :global(:root:not([data-theme="light"])) .inputWrapper:focus-within:not(.error):not(.disabled) {
+    background:
+      rgba(255, 255, 255, 0.1) padding-box,
+      linear-gradient(135deg, rgba(96,165,250,0.5), rgba(129,140,248,0.35), rgba(168,85,247,0.5)) border-box;
+    box-shadow: 0 0 0 3px rgba(129,140,248,0.2), 0 1px 3px rgba(0,0,0,0.3);
+  }
+  :global(:root:not([data-theme="light"])) .inputWrapper.error {
+    background:
+      rgba(255,255,255,0.06) padding-box,
+      linear-gradient(135deg, rgba(244,63,94,0.45), rgba(190,18,60,0.28)) border-box;
+  }
 }
