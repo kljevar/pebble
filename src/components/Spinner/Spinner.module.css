@@ -1,18 +1,25 @@
 .spinner {
   display: inline-block;
   flex-shrink: 0;
-  animation: pb-spin 0.7s linear infinite;
-  color: currentColor;
+  animation: pb-spin 0.8s linear infinite;
+  overflow: visible;
 }
+
+/* ─── Track — violet-tinted, breathing pulse ─────────────────────────────── */
 
 .track {
-  stroke: currentColor;
-  opacity: 0.15;
+  stroke: rgba(99, 102, 241, 0.12);
+  fill: none;
+  animation: pb-pulse 1.5s ease-in-out infinite;
 }
 
-.head {
-  stroke: currentColor;
+/* ─── Arc — gradient applied inline via stroke prop ─────────────────────── */
+
+.arc {
+  fill: none;
 }
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────── */
 
 .xs { /* 12px */ }
 .sm { /* 16px */ }
@@ -20,7 +27,26 @@
 .lg { /* 32px */ }
 .xl { /* 48px */ }
 
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
 @keyframes pb-spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+@keyframes pb-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.6; }
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
+
+:global([data-theme="dark"]) .track {
+  stroke: rgba(99, 102, 241, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .track {
+    stroke: rgba(99, 102, 241, 0.15);
+  }
 }

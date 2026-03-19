@@ -1,4 +1,9 @@
-/* iOS 26 Liquid Glass — dark frosted glass tooltip */
+/* iOS 26 Liquid Glass — dark frosted glass tooltip, always dark for contrast */
+
+/* Arrow color matches tooltip surface */
+:root {
+  --pb-tooltip-bg: rgba(55, 48, 90, 0.92);
+}
 
 .wrapper {
   position: relative;
@@ -12,31 +17,26 @@
 .tooltip {
   position: absolute;
   z-index: var(--pb-z-tooltip);
-  background:
-    rgba(18, 18, 24, 0.82) padding-box,
-    linear-gradient(135deg, rgba(129,140,248,0.25), rgba(168,85,247,0.15), rgba(96,165,250,0.25)) border-box;
-  border: 1px solid transparent;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: var(--pb-tooltip-bg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: rgba(255, 255, 255, 0.92);
   font-family: var(--pb-font-sans);
-  font-size: var(--pb-text-xs);
+  font-size: 12px;
   font-weight: var(--pb-font-medium);
-  line-height: var(--pb-leading-snug);
-  padding: 6px var(--pb-space-3);
-  border-radius: var(--pb-radius-xl);
-  white-space: nowrap;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 8px;
   pointer-events: none;
   opacity: 0;
   transition:
     opacity var(--pb-ease-base),
     transform var(--pb-ease-spring-bounce);
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  max-width: 220px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  max-width: 200px;
   white-space: normal;
-  text-align: center;
+  text-align: left;
 }
 
 .wrapper:hover .tooltip,
@@ -70,7 +70,7 @@
   transform: translateX(-50%);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid rgba(18, 18, 24, 0.82);
+  border-top: 5px solid var(--pb-tooltip-bg);
 }
 
 /* Bottom */
@@ -89,7 +89,7 @@
   transform: translateX(-50%);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid rgba(18, 18, 24, 0.82);
+  border-bottom: 5px solid var(--pb-tooltip-bg);
 }
 
 /* Left */
@@ -108,7 +108,7 @@
   transform: translateY(-50%);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 5px solid rgba(18, 18, 24, 0.82);
+  border-left: 5px solid var(--pb-tooltip-bg);
 }
 
 /* Right */
@@ -127,5 +127,17 @@
   transform: translateY(-50%);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-right: 5px solid rgba(18, 18, 24, 0.82);
+  border-right: 5px solid var(--pb-tooltip-bg);
+}
+
+/* ─── Dark mode — slightly deeper, same dark surface ─────────────────────── */
+
+:global([data-theme="dark"]) {
+  --pb-tooltip-bg: rgba(40, 35, 75, 0.95);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) {
+    --pb-tooltip-bg: rgba(40, 35, 75, 0.95);
+  }
 }

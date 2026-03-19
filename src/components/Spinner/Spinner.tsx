@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import styles from './Spinner.module.css';
 
 export type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -20,6 +20,8 @@ const sizeMap: Record<SpinnerSize, number> = {
 export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
   ({ size = 'md', label = 'Loading…', className = '' }, ref) => {
     const px = sizeMap[size];
+    const gradId = useId().replace(/:/g, '');
+
     return (
       <svg
         ref={ref}
@@ -31,6 +33,16 @@ export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
         aria-label={label}
         role="status"
       >
+        <defs>
+          {/* Gradient goes from trailing edge (transparent) to leading edge (violet) */}
+          <linearGradient id={gradId} x1="12" y1="3" x2="21" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#6366f1" stopOpacity="0" />
+            <stop offset="40%"  stopColor="#6366f1" stopOpacity="1" />
+            <stop offset="100%" stopColor="#a855f7" stopOpacity="1" />
+          </linearGradient>
+        </defs>
+
+        {/* Track — full circle, pulses */}
         <circle
           className={styles.track}
           cx="12"
@@ -38,11 +50,14 @@ export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
           r="9"
           strokeWidth="2.5"
         />
+
+        {/* Arc — ~25% circumference, comet gradient */}
         <path
-          className={styles.head}
+          className={styles.arc}
           d="M12 3a9 9 0 0 1 9 9"
           strokeWidth="2.5"
           strokeLinecap="round"
+          stroke={`url(#${gradId})`}
         />
       </svg>
     );

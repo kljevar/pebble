@@ -1,10 +1,12 @@
-/* iOS 26 Liquid Glass — glass surface, gradient focus border */
+/* iOS 26 Liquid Glass — custom dropdown, glass trigger, frosted panel */
 
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--pb-space-1);
   width: 100%;
+  isolation: isolate;
 }
 
 .label {
@@ -16,112 +18,187 @@
   letter-spacing: -0.01em;
 }
 
-/* ─── Select wrapper ─────────────────────────────────────────────────────── */
+/* ─── Trigger wrapper (anchors dropdown above helper text) ───────────────── */
 
-.selectWrapper {
+.triggerWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Trigger ────────────────────────────────────────────────────────────── */
+
+.trigger {
   position: relative;
   display: flex;
   align-items: center;
-  background:
-    rgba(255, 255, 255, 0.72) padding-box,
-    linear-gradient(135deg, rgba(210,210,220,0.5), rgba(190,190,205,0.32)) border-box;
-  border: 1.5px solid transparent;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--pb-space-3);
+  background: rgba(120, 100, 200, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: var(--pb-radius-xl);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
-  transition:
-    background var(--pb-ease-base),
-    box-shadow var(--pb-ease-base);
-}
-
-.selectWrapper:focus-within:not(.error):not(.disabled) {
-  background:
-    rgba(255, 255, 255, 0.88) padding-box,
-    linear-gradient(135deg, rgba(96,165,250,0.65), rgba(129,140,248,0.45), rgba(168,85,247,0.65)) border-box;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow:
-    0 0 0 3px rgba(129, 140, 248, 0.15),
-    0 1px 3px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(120, 100, 200, 0.08),
+    0 1px 3px rgba(80, 70, 120, 0.1);
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.selectWrapper.error {
-  background:
-    rgba(255, 255, 255, 0.72) padding-box,
-    linear-gradient(135deg, rgba(244,63,94,0.55), rgba(190,18,60,0.35)) border-box;
+.trigger:focus-visible {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.selectWrapper.error:focus-within {
-  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+.trigger.open {
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.selectWrapper.disabled {
-  background: var(--pb-bg-disabled);
+.trigger.error {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.trigger.disabled {
+  background: rgba(200, 195, 215, 0.15);
+  border-color: rgba(200, 195, 215, 0.3);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
+  color: var(--pb-text-disabled);
   cursor: not-allowed;
 }
 
 /* ─── Sizes ─────────────────────────────────────────────────────────────── */
 
-.sm { height: var(--pb-input-height-sm); }
+.sm { height: var(--pb-input-height-sm); font-size: var(--pb-text-xs); }
 .md { height: var(--pb-input-height-md); }
-.lg { height: var(--pb-input-height-lg); }
+.lg { height: var(--pb-input-height-lg); font-size: var(--pb-text-base); }
 
-/* ─── Native select ──────────────────────────────────────────────────────── */
+/* ─── Trigger label ──────────────────────────────────────────────────────── */
 
-.select {
+.triggerValue {
   flex: 1;
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: var(--pb-font-sans);
-  font-size: var(--pb-text-sm);
-  color: var(--pb-text-primary);
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 0 calc(var(--pb-space-6) + var(--pb-space-2)) 0 var(--pb-space-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.sm .select {
-  font-size: var(--pb-text-xs);
-  padding-left: var(--pb-space-2);
+.triggerPlaceholder {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--pb-icon-color);
 }
 
-.lg .select {
-  font-size: var(--pb-text-base);
-  padding-left: var(--pb-space-4);
-}
-
-.select:disabled {
-  cursor: not-allowed;
-  color: var(--pb-text-disabled);
-}
-
-/* ─── Custom chevron ─────────────────────────────────────────────────────── */
+/* ─── Chevron ────────────────────────────────────────────────────────────── */
 
 .chevron {
-  position: absolute;
-  right: var(--pb-space-3);
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
+  margin-left: var(--pb-space-2);
   color: var(--pb-text-secondary);
-  transition: color var(--pb-ease-base);
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.2s;
 }
 
-.selectWrapper:focus-within .chevron {
+.chevronOpen {
+  transform: rotate(180deg);
   color: #818cf8;
 }
 
-.disabled .chevron {
+.trigger.disabled .chevron {
   color: var(--pb-text-disabled);
+}
+
+/* ─── Dropdown panel ─────────────────────────────────────────────────────── */
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  list-style: none;
+  margin: 0;
+  padding: var(--pb-space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(245, 242, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 32px rgba(80, 70, 120, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+}
+
+/* ─── Option items ───────────────────────────────────────────────────────── */
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--pb-font-sans);
+  font-size: var(--pb-text-sm);
+  color: var(--pb-text-primary);
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.option:hover:not(.optionDisabled) {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.optionSelected {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  font-weight: var(--pb-font-medium);
+}
+
+.optionSelected:hover {
+  background: rgba(99, 102, 241, 0.18);
+}
+
+.optionDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.checkmark {
+  display: inline-flex;
+  align-items: center;
+  color: #6366f1;
+  flex-shrink: 0;
+  margin-left: var(--pb-space-2);
 }
 
 /* ─── Helper / Error text ────────────────────────────────────────────────── */
@@ -144,42 +221,109 @@
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
-:global([data-theme="dark"]) .selectWrapper {
-  background:
-    rgba(255, 255, 255, 0.06) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+:global([data-theme="dark"]) .trigger {
+  background: rgba(120, 100, 200, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-:global([data-theme="dark"]) .selectWrapper:focus-within:not(.error):not(.disabled) {
-  background:
-    rgba(255, 255, 255, 0.1) padding-box,
-    linear-gradient(135deg, rgba(96,165,250,0.5), rgba(129,140,248,0.35), rgba(168,85,247,0.5)) border-box;
-  box-shadow: 0 0 0 3px rgba(129,140,248,0.2), 0 1px 3px rgba(0,0,0,0.3);
+:global([data-theme="dark"]) .trigger.open,
+:global([data-theme="dark"]) .trigger:focus-visible {
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-:global([data-theme="dark"]) .selectWrapper.error {
-  background:
-    rgba(255,255,255,0.06) padding-box,
-    linear-gradient(135deg, rgba(244,63,94,0.45), rgba(190,18,60,0.28)) border-box;
+:global([data-theme="dark"]) .trigger.error {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme="dark"]) .trigger.disabled {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+:global([data-theme="dark"]) .dropdown {
+  background: rgba(40, 35, 65, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+:global([data-theme="dark"]) .option {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme="dark"]) .option:hover:not(.optionDisabled) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme="dark"]) .optionSelected {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+}
+
+:global([data-theme="dark"]) .optionSelected:hover {
+  background: rgba(99, 102, 241, 0.28);
+}
+
+:global([data-theme="dark"]) .checkmark {
+  color: #818cf8;
 }
 
 @media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .selectWrapper {
-    background:
-      rgba(255, 255, 255, 0.06) padding-box,
-      linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)) border-box;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  :global(:root:not([data-theme="light"])) .trigger {
+    background: rgba(120, 100, 200, 0.1);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 2px 8px rgba(0, 0, 0, 0.3);
   }
-  :global(:root:not([data-theme="light"])) .selectWrapper:focus-within:not(.error):not(.disabled) {
-    background:
-      rgba(255, 255, 255, 0.1) padding-box,
-      linear-gradient(135deg, rgba(96,165,250,0.5), rgba(129,140,248,0.35), rgba(168,85,247,0.5)) border-box;
-    box-shadow: 0 0 0 3px rgba(129,140,248,0.2), 0 1px 3px rgba(0,0,0,0.3);
+  :global(:root:not([data-theme="light"])) .trigger.open,
+  :global(:root:not([data-theme="light"])) .trigger:focus-visible {
+    border-color: rgba(99, 102, 241, 0.6);
+    box-shadow:
+      0 0 0 3px rgba(99, 102, 241, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
-  :global(:root:not([data-theme="light"])) .selectWrapper.error {
-    background:
-      rgba(255,255,255,0.06) padding-box,
-      linear-gradient(135deg, rgba(244,63,94,0.45), rgba(190,18,60,0.28)) border-box;
+  :global(:root:not([data-theme="light"])) .trigger.error {
+    border-color: rgba(239, 68, 68, 0.6);
+    box-shadow:
+      0 0 0 3px rgba(239, 68, 68, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  :global(:root:not([data-theme="light"])) .trigger.disabled {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+  :global(:root:not([data-theme="light"])) .dropdown {
+    background: rgba(40, 35, 65, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  :global(:root:not([data-theme="light"])) .option {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  :global(:root:not([data-theme="light"])) .option:hover:not(.optionDisabled) {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  :global(:root:not([data-theme="light"])) .optionSelected {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+  }
+  :global(:root:not([data-theme="light"])) .optionSelected:hover {
+    background: rgba(99, 102, 241, 0.28);
+  }
+  :global(:root:not([data-theme="light"])) .checkmark {
+    color: #818cf8;
   }
 }
