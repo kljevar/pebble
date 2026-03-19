@@ -64,47 +64,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--pb-radius-md);
-  background:
-    rgba(255, 255, 255, 0.72) padding-box,
-    linear-gradient(135deg, rgba(200, 200, 210, 0.45), rgba(180, 180, 195, 0.28)) border-box;
-  border: 1.5px solid transparent;
+  border-radius: 6px;
+  background: rgba(120, 100, 200, 0.07);
+  border: 1.5px solid rgba(150, 140, 180, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition:
-    background var(--pb-ease-spring-bounce),
-    box-shadow var(--pb-ease-base);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
 
 /* Hover (unchecked) */
-.input:hover:not(:disabled) ~ .checkboxBox {
-  background:
-    rgba(255, 255, 255, 0.88) padding-box,
-    linear-gradient(135deg, rgba(96, 165, 250, 0.5), rgba(168, 85, 247, 0.5)) border-box;
+.input:hover:not(:disabled):not(:checked) ~ .checkboxBox {
+  background: rgba(120, 100, 200, 0.12);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 /* Focus */
 .input:focus-visible ~ .checkboxBox {
-  box-shadow: var(--pb-focus-ring);
-  background:
-    rgba(255, 255, 255, 0.88) padding-box,
-    linear-gradient(135deg, rgba(96, 165, 250, 0.65), rgba(168, 85, 247, 0.65)) border-box;
+  box-shadow: var(--pb-focus-ring), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: rgba(99, 102, 241, 0.6);
   outline: none;
 }
 
 /* Checked */
 .input:checked ~ .checkboxBox {
-  background: var(--pb-gradient-primary);
-  border-color: transparent;
-  box-shadow: 0 1px 8px rgba(129, 140, 248, 0.4);
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Checked hover — brighter gradient, never flat */
+.input:checked:hover:not(:disabled) ~ .checkboxBox {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  box-shadow:
+    0 0 16px rgba(139, 92, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* Indeterminate */
 .input:indeterminate ~ .checkboxBox {
-  background: var(--pb-gradient-primary);
-  border-color: transparent;
-  box-shadow: 0 1px 8px rgba(129, 140, 248, 0.4);
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Indeterminate hover — brighter gradient */
+.input:indeterminate:hover:not(:disabled) ~ .checkboxBox {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  box-shadow:
+    0 0 16px rgba(139, 92, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* Disabled */
@@ -177,26 +193,34 @@
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
 :global([data-theme="dark"]) .checkboxBox {
-  background:
-    rgba(255, 255, 255, 0.07) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)) border-box;
+  background: rgba(120, 100, 200, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-:global([data-theme="dark"]) .input:hover:not(:disabled) ~ .checkboxBox {
-  background:
-    rgba(255, 255, 255, 0.12) padding-box,
-    linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+:global([data-theme="dark"]) .input:hover:not(:disabled):not(:checked):not(:indeterminate) ~ .checkboxBox {
+  background: rgba(120, 100, 200, 0.2);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+:global([data-theme="dark"]) .input:checked:hover:not(:disabled) ~ .checkboxBox,
+:global([data-theme="dark"]) .input:indeterminate:hover:not(:disabled) ~ .checkboxBox {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  box-shadow:
+    0 0 16px rgba(139, 92, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme="light"])) .checkboxBox {
-    background:
-      rgba(255, 255, 255, 0.07) padding-box,
-      linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)) border-box;
+  :global(:root:not([data-theme="light"])) .input:hover:not(:disabled):not(:checked):not(:indeterminate) ~ .checkboxBox {
+    background: rgba(120, 100, 200, 0.2);
+    border-color: rgba(99, 102, 241, 0.5);
   }
-  :global(:root:not([data-theme="light"])) .input:hover:not(:disabled) ~ .checkboxBox {
-    background:
-      rgba(255, 255, 255, 0.12) padding-box,
-      linear-gradient(135deg, rgba(96,165,250,0.4), rgba(168,85,247,0.4)) border-box;
+  :global(:root:not([data-theme="light"])) .input:checked:hover:not(:disabled) ~ .checkboxBox,
+  :global(:root:not([data-theme="light"])) .input:indeterminate:hover:not(:disabled) ~ .checkboxBox {
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    box-shadow:
+      0 0 16px rgba(139, 92, 246, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 }
