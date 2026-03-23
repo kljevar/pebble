@@ -1,5 +1,5 @@
 {
-  "name": "pebble-design-system",
+  "name": "@chloe0592/pebble",
   "version": "0.1.0",
   "description": "A compact, thoughtfully designed React component library",
   "type": "module",
