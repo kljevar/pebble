@@ -50,7 +50,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading ? (
-          <Spinner size="sm" label="Loading" />
+          <Spinner
+            size="sm"
+            label="Loading"
+            color={variant === 'primary' || variant === 'danger' ? 'white' : 'indigo'}
+          />
         ) : (
           leftIcon && (
             <span className={styles.iconLeft} aria-hidden="true">
