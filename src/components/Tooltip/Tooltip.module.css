@@ -34,7 +34,8 @@
     opacity var(--pb-ease-base),
     transform var(--pb-ease-spring-bounce);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  max-width: 200px;
+  width: max-content;
+  max-width: 220px;
   white-space: normal;
   word-wrap: break-word;
   text-align: left;
