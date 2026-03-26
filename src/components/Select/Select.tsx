@@ -149,7 +149,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
       undefined;
 
     return (
-      <div ref={containerRef} className={[styles.wrapper, className].filter(Boolean).join(' ')}>
+      <div ref={containerRef} className={[styles.wrapper, isOpen ? styles.wrapperOpen : '', className].filter(Boolean).join(' ')}>
         {label && (
           <label id={`${id}-label`} htmlFor={id} className={styles.label}>
             {label}
