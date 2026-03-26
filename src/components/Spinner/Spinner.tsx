@@ -7,6 +7,7 @@ export type SpinnerColor = 'indigo' | 'white';
 
 export interface SpinnerProps {
   size?: SpinnerSize;
+  /** Visible text rendered beside the spinner. Also used as aria-label. */
   label?: string;
   className?: string;
   color?: SpinnerColor;
@@ -21,7 +22,7 @@ const sizeMap: Record<SpinnerSize, number> = {
 };
 
 export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
-  ({ size = 'md', label = 'Loading…', className = '', color = 'indigo' }, ref) => {
+  ({ size = 'md', label, className = '', color = 'indigo' }, ref) => {
     const px = sizeMap[size];
     const gradId = useId().replace(/:/g, '');
 
@@ -31,19 +32,19 @@ export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
     const stopTo    = isWhite ? 'rgba(255,255,255,0.9)' : '#a855f7';
     const trackColor = isWhite ? 'rgba(255,255,255,0.25)' : undefined;
 
-    return (
+    const svg = (
       <svg
         ref={ref}
-        className={[styles.spinner, styles[size], className].filter(Boolean).join(' ')}
+        className={[styles.spinner, styles[size], label ? '' : className].filter(Boolean).join(' ')}
         width={px}
         height={px}
         viewBox="0 0 24 24"
         fill="none"
-        aria-label={label}
+        aria-label={label ?? 'Loading…'}
         role="status"
+        aria-hidden={label ? true : undefined}
       >
         <defs>
-          {/* Gradient goes from trailing edge (transparent) to leading edge */}
           <linearGradient id={gradId} x1="12" y1="3" x2="21" y2="12" gradientUnits="userSpaceOnUse">
             <stop offset="0%"   stopColor={stopFrom} stopOpacity="1" />
             <stop offset="40%"  stopColor={stopMid}  stopOpacity="1" />
@@ -70,6 +71,21 @@ export const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(
           stroke={`url(#${gradId})`}
         />
       </svg>
+    );
+
+    if (!label) return svg;
+
+    return (
+      <span
+        className={[styles.wrapper, className].filter(Boolean).join(' ')}
+        role="status"
+        aria-label={label}
+      >
+        {svg}
+        <span className={[styles.labelText, styles[`label-${size}`]].filter(Boolean).join(' ')}>
+          {label}
+        </span>
+      </span>
     );
   }
 );

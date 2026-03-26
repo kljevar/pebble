@@ -32,20 +32,18 @@ export const AllSizes: Story = {
   ),
 };
 
+export const WithLabel: Story = {
+  args: { size: 'md', label: 'Loading data…' },
+};
+
 export const InContext: Story = {
   render: () => (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        color: '#4f46e5',
-        fontSize: '14px',
-        fontFamily: 'var(--pb-font-sans)',
-      }}
-    >
-      <Spinner size="sm" />
-      <span>Loading data…</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Spinner size="xs" label="Loading data…" />
+      <Spinner size="sm" label="Loading data…" />
+      <Spinner size="md" label="Loading data…" />
+      <Spinner size="lg" label="Loading data…" />
+      <Spinner size="xl" label="Loading data…" />
     </div>
   ),
 };

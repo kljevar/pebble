@@ -1,3 +1,32 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.labelText {
+  font-family: var(--pb-font-sans);
+  font-size: 14px;
+  color: #1a1730;
+  line-height: 1;
+}
+
+.label-xs { font-size: 11px; }
+.label-sm { font-size: 12px; }
+.label-md { font-size: 14px; }
+.label-lg { font-size: 16px; }
+.label-xl { font-size: 18px; }
+
+:global([data-theme="dark"]) .labelText {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .labelText {
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
 .spinner {
   display: inline-block;
   flex-shrink: 0;
