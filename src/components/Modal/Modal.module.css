@@ -22,8 +22,8 @@
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--pb-radius-3xl);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 8px 40px rgba(30, 20, 60, 0.25);
+    0 8px 40px rgba(30, 20, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - var(--pb-space-8));
@@ -169,10 +169,10 @@
 
 :global([data-theme="dark"]) .dialog {
   background: rgba(40, 35, 65, 0.85);
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 8px 32px rgba(0, 0, 0, 0.5);
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 :global([data-theme="dark"]) .title {
@@ -213,10 +213,10 @@
   }
   :global(:root:not([data-theme="light"])) .dialog {
     background: rgba(40, 35, 65, 0.85);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.1);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.15),
-      0 8px 32px rgba(0, 0, 0, 0.5);
+      0 8px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
   :global(:root:not([data-theme="light"])) .title {
     color: #ffffff;
