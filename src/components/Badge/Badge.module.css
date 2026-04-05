@@ -98,30 +98,35 @@
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
+:global(.dark) .default,
 :global([data-theme="dark"]) .default {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.18);
   color: var(--pb-stone-300);
 }
 
+:global(.dark) .success,
 :global([data-theme="dark"]) .success {
   background: rgba(21, 128, 61, 0.3);
   border-color: rgba(34, 197, 94, 0.5);
   color: #bbf7d0;
 }
 
+:global(.dark) .warning,
 :global([data-theme="dark"]) .warning {
   background: rgba(180, 83, 9, 0.3);
   border-color: rgba(245, 158, 11, 0.5);
   color: #fde68a;
 }
 
+:global(.dark) .danger,
 :global([data-theme="dark"]) .danger {
   background: rgba(190, 18, 60, 0.3);
   border-color: rgba(244, 63, 94, 0.5);
   color: #fecdd3;
 }
 
+:global(.dark) .info,
 :global([data-theme="dark"]) .info {
   background: rgba(3, 105, 161, 0.3);
   border-color: rgba(14, 165, 233, 0.5);

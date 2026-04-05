@@ -192,17 +192,21 @@
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
+:global(.dark) .checkboxBox,
 :global([data-theme="dark"]) .checkboxBox {
   background: rgba(120, 100, 200, 0.12);
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+:global(.dark) .input:hover:not(:disabled):not(:checked):not(:indeterminate) ~ .checkboxBox,
 :global([data-theme="dark"]) .input:hover:not(:disabled):not(:checked):not(:indeterminate) ~ .checkboxBox {
   background: rgba(120, 100, 200, 0.2);
   border-color: rgba(99, 102, 241, 0.5);
 }
 
+:global(.dark) .input:checked:hover:not(:disabled) ~ .checkboxBox,
+:global(.dark) .input:indeterminate:hover:not(:disabled) ~ .checkboxBox,
 :global([data-theme="dark"]) .input:checked:hover:not(:disabled) ~ .checkboxBox,
 :global([data-theme="dark"]) .input:indeterminate:hover:not(:disabled) ~ .checkboxBox {
   background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);

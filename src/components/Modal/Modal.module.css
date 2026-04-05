@@ -161,12 +161,14 @@
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
+:global(.dark) .backdrop,
 :global([data-theme="dark"]) .backdrop {
   background: rgba(10, 8, 20, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
+:global(.dark) .dialog,
 :global([data-theme="dark"]) .dialog {
   background: rgba(40, 35, 65, 0.85);
   border-color: rgba(255, 255, 255, 0.1);
@@ -175,31 +177,37 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+:global(.dark) .title,
 :global([data-theme="dark"]) .title {
   color: #ffffff;
 }
 
+:global(.dark) .description,
 :global([data-theme="dark"]) .description {
   color: rgba(255, 255, 255, 0.5);
 }
 
+:global(.dark) .body,
 :global([data-theme="dark"]) .body {
   color: #a8a0c8;
   --pb-stone-600: #a8a0c8;
 }
 
+:global(.dark) .closeBtn,
 :global([data-theme="dark"]) .closeBtn {
   background: rgba(255, 255, 255, 0.07);
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--pb-stone-400);
 }
 
+:global(.dark) .closeBtn:hover,
 :global([data-theme="dark"]) .closeBtn:hover {
   background: rgba(255, 255, 255, 0.13);
   border-color: rgba(255, 255, 255, 0.18);
   color: var(--pb-stone-100);
 }
 
+:global(.dark) .footer,
 :global([data-theme="dark"]) .footer {
   border-top-color: rgba(255, 255, 255, 0.08);
   background: rgba(0, 0, 0, 0.2);

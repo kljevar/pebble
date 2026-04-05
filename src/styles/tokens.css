@@ -162,6 +162,7 @@
 
 /* ─── Dark Mode ────────────────────────────────────────────────────────────── */
 
+.dark,
 [data-theme="dark"] {
   --pb-border-color:       var(--pb-stone-700);
   --pb-border-color-focus: var(--pb-primary-400);

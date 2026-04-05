@@ -134,6 +134,7 @@
 
 /* ─── Dark mode — slightly deeper, same dark surface ─────────────────────── */
 
+:global(.dark),
 :global([data-theme="dark"]) {
   --pb-tooltip-bg: rgba(40, 35, 75, 0.95);
 }
