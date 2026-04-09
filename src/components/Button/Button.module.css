@@ -104,44 +104,70 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
-/* Secondary — frosted glass with cool violet tint */
+/* Secondary — iOS 26 liquid glass: white-dominant frosted base with indigo/violet tint
+   In light mode, backdrop-filter against white has low visual impact on its own, so the
+   glass effect comes from: white semi-transparent base + saturate boost + bright top-edge
+   highlight + ::before shimmer overlay that gives depth independently of the background. */
 .secondary {
   background: linear-gradient(
-    135deg,
-    rgba(120, 100, 200, 0.12) 0%,
-    rgba(90, 70, 170, 0.08) 100%
+    160deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(224, 222, 255, 0.48) 55%,
+    rgba(242, 222, 255, 0.42) 100%
   );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #3d3580;
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: var(--pb-primary-600);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 2px 8px rgba(120, 100, 200, 0.12);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(129, 140, 248, 0.18),
+    0 4px 16px rgba(99, 102, 241, 0.16),
+    0 1px 4px rgba(99, 102, 241, 0.1);
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Glass shimmer overlay — top highlight stripe that creates depth on any background */
+.secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(255, 255, 255, 0.12) 28%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .secondary:hover:not(:disabled) {
   background: linear-gradient(
-    135deg,
-    rgba(150, 130, 230, 0.16) 0%,
-    rgba(110, 90, 200, 0.1) 100%
+    160deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(214, 212, 255, 0.58) 55%,
+    rgba(238, 214, 255, 0.5) 100%
   );
-  border-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.82);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 6px 16px 4px rgba(120, 100, 200, 0.16);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(129, 140, 248, 0.22),
+    0 6px 24px rgba(99, 102, 241, 0.22),
+    0 2px 8px rgba(99, 102, 241, 0.14);
 }
 
 .secondary:active:not(:disabled) {
   background: linear-gradient(
-    135deg,
-    rgba(120, 100, 200, 0.08) 0%,
-    rgba(90, 70, 170, 0.05) 100%
+    160deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(224, 222, 255, 0.38) 55%,
+    rgba(242, 222, 255, 0.32) 100%
   );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 1px 4px rgba(120, 100, 200, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(129, 140, 248, 0.12),
+    0 1px 6px rgba(99, 102, 241, 0.1);
 }
 
 /* Ghost — transparent, subtle glass on hover */
@@ -261,21 +287,48 @@
 
 /* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 
+/* Dark mode: flip to dark-tinted glass — white base would wash out the dark surface */
 :global(.dark) .secondary,
 :global([data-theme="dark"]) .secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    160deg,
+    rgba(30, 27, 75, 0.55) 0%,
+    rgba(99, 102, 241, 0.22) 55%,
+    rgba(168, 85, 247, 0.18) 100%
+  );
+  border: 1px solid rgba(129, 140, 248, 0.32);
+  color: var(--pb-primary-300);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(168, 85, 247, 0.2),
+    0 4px 16px rgba(99, 102, 241, 0.25),
+    0 1px 4px rgba(99, 102, 241, 0.15);
+}
+
+:global(.dark) .secondary::before,
+:global([data-theme="dark"]) .secondary::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 28%,
+    rgba(255, 255, 255, 0) 55%
+  );
 }
 
 :global(.dark) .secondary:hover:not(:disabled),
 :global([data-theme="dark"]) .secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    160deg,
+    rgba(30, 27, 75, 0.65) 0%,
+    rgba(99, 102, 241, 0.3) 55%,
+    rgba(168, 85, 247, 0.24) 100%
+  );
+  border-color: rgba(129, 140, 248, 0.46);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 4px 16px rgba(139, 92, 246, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(168, 85, 247, 0.26),
+    0 6px 24px rgba(99, 102, 241, 0.32),
+    0 2px 8px rgba(99, 102, 241, 0.2);
 }
 
 :global(.dark) .ghost,
@@ -305,18 +358,43 @@
 
 @media (prefers-color-scheme: dark) {
   :global(:root:not([data-theme="light"])) .secondary {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.9);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      160deg,
+      rgba(30, 27, 75, 0.55) 0%,
+      rgba(99, 102, 241, 0.22) 55%,
+      rgba(168, 85, 247, 0.18) 100%
+    );
+    border: 1px solid rgba(129, 140, 248, 0.32);
+    color: var(--pb-primary-300);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(168, 85, 247, 0.2),
+      0 4px 16px rgba(99, 102, 241, 0.25),
+      0 1px 4px rgba(99, 102, 241, 0.15);
+  }
+
+  :global(:root:not([data-theme="light"])) .secondary::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 28%,
+      rgba(255, 255, 255, 0) 55%
+    );
   }
 
   :global(:root:not([data-theme="light"])) .secondary:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(
+      160deg,
+      rgba(30, 27, 75, 0.65) 0%,
+      rgba(99, 102, 241, 0.3) 55%,
+      rgba(168, 85, 247, 0.24) 100%
+    );
+    border-color: rgba(129, 140, 248, 0.46);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.15),
-      0 4px 16px rgba(139, 92, 246, 0.22);
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      inset 0 -1px 0 rgba(168, 85, 247, 0.26),
+      0 6px 24px rgba(99, 102, 241, 0.32),
+      0 2px 8px rgba(99, 102, 241, 0.2);
   }
 
   :global(:root:not([data-theme="light"])) .ghost {
