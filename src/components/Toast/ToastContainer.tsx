@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ToastContainerProps, ToastPosition } from './Toast.types';
 import { ToastContext } from './ToastContext';
@@ -19,9 +19,12 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   className = '',
 }) => {
   const ctx = useContext(ToastContext);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // ToastContainer can be rendered standalone (outside a provider) — no-op if no context
-  if (!ctx) return null;
+  if (!ctx || !mounted) return null;
 
   const { toasts, removeToast } = ctx;
   const isBottom = position.startsWith('bottom');

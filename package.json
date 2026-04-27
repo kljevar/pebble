@@ -1,6 +1,6 @@
 {
   "name": "@chloe0592/pebble",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A compact, thoughtfully designed React component library",
   "type": "module",
   "main": "./dist/pebble.umd.js",
