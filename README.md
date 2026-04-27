@@ -280,6 +280,92 @@ Sizes: `xs` | `sm` | `md` | `lg` | `xl`
 
 ---
 
+### Toast
+
+Variants: `success` | `error` | `warning` | `info`
+Positions: `top-left` | `top-center` | `top-right` | `bottom-left` | `bottom-center` | `bottom-right`
+
+Wrap your app root with `<ToastProvider>`, then call `useToast()` anywhere inside it.
+
+```tsx
+// 1. Wrap your app
+import { ToastProvider } from 'pebble-design-system';
+
+function App() {
+  return (
+    <ToastProvider position="top-right">
+      <YourApp />
+    </ToastProvider>
+  );
+}
+
+// 2. Trigger toasts from any component
+import { useToast } from 'pebble-design-system';
+
+function SaveButton() {
+  const { addToast } = useToast();
+
+  return (
+    <Button
+      onClick={() =>
+        addToast({
+          variant: 'success',
+          title: 'Changes saved',
+          message: 'Your project has been updated.',
+        })
+      }
+    >
+      Save
+    </Button>
+  );
+}
+```
+
+**With an action button:**
+
+```tsx
+addToast({
+  variant: 'error',
+  title: 'Upload failed',
+  message: 'The file could not be uploaded.',
+  action: { label: 'Retry', onClick: () => retryUpload() },
+});
+```
+
+**No auto-dismiss:**
+
+```tsx
+addToast({
+  variant: 'warning',
+  message: 'You have unsaved changes.',
+  duration: 0, // stays until manually dismissed
+});
+```
+
+**Programmatic control:**
+
+```tsx
+const { addToast, removeToast, clearAll } = useToast();
+
+const id = addToast({ variant: 'info', message: 'Processing…' });
+// later:
+removeToast(id);
+clearAll();
+```
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `'success' \| 'error' \| 'warning' \| 'info'` | — | Visual style and icon |
+| `message` | `string` | — | Body text (required) |
+| `title` | `string` | — | Optional bold heading |
+| `duration` | `number` | `4000` | Auto-dismiss in ms; `0` = no auto-dismiss |
+| `dismissible` | `boolean` | `true` | Show close button |
+| `action` | `{ label: string; onClick: () => void }` | — | Optional action button |
+
+`<ToastProvider>` accepts `position` (default `'top-right'`) and `maxToasts` (default `5`).
+
+---
+
 ## Design Tokens
 
 Pebble exposes all design tokens as CSS custom properties prefixed with `--pb-*`. You can override them to theme the library:
